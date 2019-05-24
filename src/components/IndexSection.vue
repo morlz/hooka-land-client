@@ -1,26 +1,29 @@
 <template>
-	<section 
-		class="IndexSection">
-		<h3 
+	<section class="IndexSection">
+		<h3
+			class="IndexSection__title"
 			v-if="title"
-			class="IndexSection__title">{{ title }}</h3>
+		>{{ title }}</h3>
 
-		<div 
+		<div
+			:style="styles"
 			class="IndexSection__inner"
-			:style="styles">
-			<q-img 
-				v-if="!right && img"
+		>
+			<q-img
+				:src="img"
 				class="IndexSection__img shadow-6"
-				:src="img" />
+				v-if="!right && img"
+			/>
 
 			<div class="IndexSection__cotnent">
 				<slot/>
 			</div>
 
-			<q-img 
-				v-if="right && img"
+			<q-img
+				:src="img"
 				class="IndexSection__img shadow-6"
-				:src="img" />
+				v-if="right && img"
+			/>
 		</div>
 	</section>
 </template>
@@ -42,7 +45,7 @@ export default {
 			if (!this.img)
 				return { gridTemplateColumns: `1fr` }
 
-			
+
 			return { gridTemplateColumns: `1fr 1fr` }
 		}
 	}

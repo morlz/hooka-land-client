@@ -1,28 +1,27 @@
 <template>
 	<q-drawer
-		:width="200"
 		:breakpoint="500"
-		show-if-above
+		:width="200"
 		bordered
-		content-class="bg-grey-3">
+		content-class="bg-grey-3"
+		show-if-above
+	>
 		<q-scroll-area class="fit">
 			<q-list>
-
 				<template v-for="{ label, items } in menu">
 					<q-item-label header>{{ label }}</q-item-label>
 
-					<q-item 
-						v-for="item, index in items"
+					<q-item
 						:key="index"
-						clickable 
+						:to="item.path"
+						clickable
+						v-for="item, index in items"
 						v-ripple
-						:to="item.path">
-						<q-item-section>
-							{{ item.label }}
-						</q-item-section>
+					>
+						<q-item-section>{{ item.label }}</q-item-section>
 					</q-item>
 
-					<q-separator spaced />
+					<q-separator spaced/>
 				</template>
 			</q-list>
 		</q-scroll-area>

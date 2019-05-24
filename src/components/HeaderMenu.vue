@@ -1,29 +1,32 @@
 <template>
-	<q-tabs :value="$route.fullPath">
-		<q-route-tab 
-			v-for="{ label, path, items }, index in menu"
-			:key="index"
-			:is="items ? 'q-btn-dropdown' : 'q-route-tab'"
-			:label="label"
-			:to="path"
-			flat
-			stretch
-			:split="!!path"
-			:name="path"
-			auto-close>
-			<q-list link>
-				<q-item 
-					v-for="item, index in items"
-					:key="index"
-					clickable
-					:to="item.path">
+	<div class="AppHeader">
+		<q-tabs :value="menu[currentIndex] ? menu[currentIndex].path : this.$route.fullPath">
+			<q-tab
+				:key="index"
+				:label="label"
+				:name="path"
+				:to="path"
+				@click="$router.push(path)"
+				stretch
+				v-for="{ label, path, items }, index in menu"
+			/>
+		</q-tabs>
 
-					<q-item-section>{{ item.label }}</q-item-section>
-
-				</q-item>
-			</q-list>
-		</q-route-tab>
-	</q-tabs>
+		<q-tabs
+			:value="$route.fullPath"
+			v-if="menu[currentIndex] && menu[currentIndex].items"
+		>
+			<q-route-tab
+				:key="index"
+				:label="label"
+				:name="path"
+				:to="path"
+				stretch
+				v-for="{ label, path }, index in menu[currentIndex].items"
+			/>
+		</q-tabs>
+		{{ currentIndex }}
+	</div>
 </template>
 
 <style>
@@ -31,17 +34,18 @@
 
 <script>
 const mapCategoryFn = cat => ({
+	id: cat.id,
 	path: `/category/${cat.id}`,
 	label: cat.name
 })
 
 const mapGroupFn = group => ({
+	id: group.id,
 	path: `/group/${group.id}`,
 	label: group.name,
 	items: group.categories
 		.map(mapCategoryFn)
 })
-
 
 export default {
 	data () {
@@ -54,14 +58,24 @@ export default {
 	computed: {
 		menu () {
 			return [{
-					path: '/',
-					label: 'Главная'
-				}]
+				id: -1,
+				path: '/',
+				label: 'Главная'
+			}]
 				.concat(
 					this.groups
 						.map(mapGroupFn)
 				)
-			
+
+		},
+
+		currentIndex () {
+			return this.menu
+				.findIndex(el =>
+					el.id == this.$route.params.group
+					|| Array.isArray(el.items)
+					&& ~el.items.findIndex(el2 => el2.id == this.$route.params.category)
+				)
 		}
 	},
 
