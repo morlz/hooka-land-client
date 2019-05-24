@@ -25,7 +25,6 @@
 				v-for="{ label, path }, index in menu[currentIndex].items"
 			/>
 		</q-tabs>
-		{{ currentIndex }}
 	</div>
 </template>
 

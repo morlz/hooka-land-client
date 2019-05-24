@@ -47,7 +47,14 @@ module.exports = function (ctx) {
 				'QCardSection',
 				'QCardActions',
 				'QImg',
-				'QPagination'
+				'QPagination',
+				'QSeparator',
+				'QBadge',
+				'QPageSticky',
+				'QPopupProxy',
+				'QAvatar',
+				'QInnerLoading',
+				'QSpinnerGears'
 			],
 
 			directives: [
@@ -56,7 +63,8 @@ module.exports = function (ctx) {
 
 			// Quasar plugins
 			plugins: [
-				'Notify'
+				'Notify',
+				'LocalStorage'
 			]
 
 			// iconSet: 'ionicons-v4'

@@ -87,7 +87,8 @@ export default {
     &__content
         display grid
         grid-gap 10px
-        grid-template-columns repeat(auto-fit, minmax(300px, 600px))
+        grid-template-columns repeat(auto-fit, minmax(250px, 1fr))
+
     &__pages
         margin 20px auto
 </style>

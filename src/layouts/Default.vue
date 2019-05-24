@@ -1,6 +1,9 @@
 <template>
 	<q-layout view="lHh Lpr lFf">
-		<q-header class="bg-white text-primary">
+		<q-header
+			class="bg-white text-primary"
+			elevated
+		>
 			<q-toolbar v-if="false">
 				<q-btn
 					@click="leftDrawerOpen = !leftDrawerOpen"
@@ -18,6 +21,7 @@
 			</q-toolbar>
 
 			<header-menu/>
+			<header-cart/>
 		</q-header>
 
 		<q-drawer
@@ -110,11 +114,13 @@
 <script>
 import { openURL } from 'quasar'
 import HeaderMenu from 'components/HeaderMenu'
+import HeaderCart from 'components/HeaderCart'
 
 export default {
 	name: 'MyLayout',
 	components: {
-		HeaderMenu
+		HeaderMenu,
+		HeaderCart
 	},
 	data () {
 		return {
