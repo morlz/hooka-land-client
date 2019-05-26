@@ -1,7 +1,7 @@
 <template>
 	<q-page class="Items">
 		<div class="Items__content">
-			<item
+			<product-item
 				:content="item"
 				:key="item.id"
 				v-for="item in items"
@@ -25,11 +25,11 @@
 </style>
 
 <script>
-import Item from 'components/Item'
+import ProductItem from 'components/ProductItem'
 
 export default {
 	components: {
-		Item
+		ProductItem
 	},
 	data () {
 		return {

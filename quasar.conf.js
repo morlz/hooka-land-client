@@ -54,7 +54,8 @@ module.exports = function (ctx) {
 				'QPopupProxy',
 				'QAvatar',
 				'QInnerLoading',
-				'QSpinnerGears'
+				'QSpinnerGears',
+				'QInput'
 			],
 
 			directives: [

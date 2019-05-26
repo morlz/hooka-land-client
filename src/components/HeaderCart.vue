@@ -22,56 +22,11 @@
 
 					<q-card-section>
 						<q-list separator>
-							<q-item
+							<product-item-mini
+								:content="content"
 								:key="id"
-								class="HeaderCartItem"
-								v-for="{ count, value }, id, index in items"
-							>
-								<q-inner-loading :showing="!value">
-									<q-spinner-gears
-										color="primary"
-										size="50px"
-									/>
-								</q-inner-loading>
-
-								<template v-if="value">
-									<q-item-section avatar>
-										<q-avatar>
-											<img
-												:src="value.img"
-												v-if="value.img"
-											>
-										</q-avatar>
-									</q-item-section>
-
-									<q-item-section>
-										<q-item-label>{{ value.name }}</q-item-label>
-										<q-item-label>{{ value.description }}</q-item-label>
-									</q-item-section>
-
-									<q-item-section side>
-										<q-item-label>
-											<span>{{ count }}</span> шт по
-											<span>{{ value.price }}</span> руб
-										</q-item-label>
-
-										<q-item-label>
-											Итого
-											<span>{{ value.price * count }}</span> руб.
-										</q-item-label>
-									</q-item-section>
-
-									<q-item-section side>
-										<q-btn
-											@click="removeItem(id)"
-											color="negative"
-											flat
-											icon="delete"
-											round
-										/>
-									</q-item-section>
-								</template>
-							</q-item>
+								v-for="content, id, index in items"
+							/>
 						</q-list>
 					</q-card-section>
 
@@ -83,6 +38,7 @@
 							color="primary"
 							icon="check"
 							label="Оформить заказ"
+							to="/order-create"
 						/>
 					</q-card-actions>
 
@@ -102,7 +58,12 @@
 <script>
 import { mapGetters, mapActions, mapMutations, mapState } from 'vuex'
 
+import ProductItemMini from './ProductItemMini'
+
 export default {
+	components: {
+		ProductItemMini
+	},
 	data () {
 		return {
 
@@ -124,9 +85,6 @@ export default {
 		...mapActions('cart', [
 			'init',
 		]),
-		...mapMutations('cart', [
-			'removeItem',
-		])
 	},
 
 	created () {
@@ -142,8 +100,5 @@ export default {
 	right 24px 
 	z-index 2000
 
-.HeaderCartItem
-	position relative
-	span
-		font-weight bold
+
 </style>
