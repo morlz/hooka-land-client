@@ -25,7 +25,7 @@ export function loadingSet (state, payload) {
 }
 
 export function cacheAppend (state, payload) {
-	state.cached.push(payload)
+	state.cached.items.push(payload)
 }
 
 
