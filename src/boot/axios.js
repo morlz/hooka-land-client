@@ -2,6 +2,6 @@ import axios from 'axios'
 
 export default async ({ Vue }) => {
 	Vue.prototype.$axios = axios.create({
-		baseURL: 'http://127.0.0.1:3333/'
+		baseURL: `http://${window.location.hostname}:3333/`
 	})
 }
