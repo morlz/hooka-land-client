@@ -32,7 +32,7 @@
 
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
 	props: {
@@ -43,7 +43,7 @@ export default {
 	},
 
 	methods: {
-		...mapMutations('cart', [
+		...mapActions('cart', [
 			'addItem'
 		])
 	}
