@@ -5,6 +5,7 @@ const routes = [
 		component: () => import('layouts/Default'),
 		children: [
 			{ name: 'home', path: '', component: () => import('pages/Index') },
+			{ name: 'auth', path: '/auth', component: () => import('pages/Auth') },
 			{ name: 'group', path: '/group/:group/:page?', component: () => import('pages/Products') },
 			{ name: 'category', path: '/category/:category/:page?', component: () => import('pages/Products') },
 			{ name: 'order-create', path: '/order-create', component: () => import('pages/OrderCreate') },
