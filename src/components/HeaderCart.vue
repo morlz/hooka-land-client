@@ -64,11 +64,6 @@ export default {
 	components: {
 		ProductItemMini
 	},
-	data () {
-		return {
-
-		}
-	},
 
 	computed: {
 		...mapGetters('cart', {

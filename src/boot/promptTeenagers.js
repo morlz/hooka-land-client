@@ -1,6 +1,7 @@
 import { Dialog } from 'quasar'
 
 export default ({ Vue }) => {
+	/*
 	Dialog.create({
 		title: 'Подтвердите, что вам больше 18 лет',
 		message: '',
@@ -11,4 +12,5 @@ export default ({ Vue }) => {
 			.open("about:blank", "_self")
 			.close()
 	}) 
+	*/
 }

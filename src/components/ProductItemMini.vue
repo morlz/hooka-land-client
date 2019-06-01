@@ -69,7 +69,7 @@ export default {
 	},
 	methods: {
 		...mapMutations('cart', [
-			'removeItem',
+			'removeItem'
 		])
 	}
 }

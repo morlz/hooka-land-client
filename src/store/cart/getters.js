@@ -27,4 +27,4 @@ export const sum = (state, getters) =>
 	Object
 		.values(getters.items)
 		.filter(({ value }) => value)
-		.reduce((acc, { value, count }) => value.price * count, 0)
+		.reduce((acc, { value, count }) => acc + value.price * count, 0)
