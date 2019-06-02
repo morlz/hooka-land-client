@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import cart from './cart'
+import auth from './auth'
+import groups from './groups'
 
 Vue.use(Vuex)
 
@@ -13,7 +15,9 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
 	const Store = new Vuex.Store({
 		modules: {
-			cart
+			cart,
+			auth,
+			groups
 		},
 
 		// enable strict mode (adds overhead!)

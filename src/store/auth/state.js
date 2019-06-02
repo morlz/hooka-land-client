@@ -1,10 +1,8 @@
 import { LocalStorage } from 'quasar'
 
-const token = LocalStorage.getItem('token') || null
-
 export default {
 	cached: {
-		token,
+		token: null,
 		user: null
 	},
 	loading: {

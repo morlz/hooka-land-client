@@ -9,7 +9,7 @@
 				<q-input
 					filled
 					label="Login"
-					v-model="form.login"
+					v-model="form.email"
 				/>
 
 				<q-input
@@ -24,6 +24,7 @@
 
 			<q-card-actions>
 				<q-btn
+					@click="signIn(form)"
 					color="primary"
 					label="Войти"
 				/>
@@ -42,18 +43,20 @@ export default {
 	data () {
 		return {
 			form: {
-				login: '',
+				email: '',
 				password: ''
 			}
 		}
 	},
 	computed: {
-		...mapGetters('cart', {
-
-		}),
-		...mapState('cart', {
-
-		})
+		...mapGetters('auth', [
+			'logined'
+		])
+	},
+	methods: {
+		...mapActions('auth', [
+			'signIn'
+		])
 	},
 	created () {
 

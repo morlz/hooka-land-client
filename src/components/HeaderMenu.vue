@@ -8,7 +8,7 @@
 				:to="path"
 				@click="$router.push(path)"
 				stretch
-				v-for="{ label, path, items }, index in menu"
+				v-for="{ label, path, items, id }, index in menu"
 			/>
 		</q-tabs>
 
@@ -32,6 +32,9 @@
 </style>
 
 <script>
+import { mapGetters, mapActions, mapMutations, mapState } from 'vuex'
+
+
 const mapCategoryFn = cat => ({
 	id: cat.id,
 	path: `/category/${cat.id}`,
@@ -47,16 +50,16 @@ const mapGroupFn = group => ({
 })
 
 export default {
-	data () {
-		return {
-			loading: false,
-			groups: [],
-		}
-	},
-
 	computed: {
+		...mapState('groups', [
+			'groups'
+		]),
+		...mapGetters('auth', [
+			'logined'
+		]),
+
 		menu () {
-			return [{
+			const res = [{
 				id: -1,
 				path: '/',
 				label: 'Главная'
@@ -65,6 +68,23 @@ export default {
 					this.groups
 						.map(mapGroupFn)
 				)
+
+			if (this.logined)
+				res.push({
+					label: 'Администрирование',
+					items: [
+						{
+							path: '/group-admin',
+							label: 'Группы',
+						},
+						{
+							path: '/product-admin',
+							label: 'Товары',
+						}
+					]
+				})
+
+			return res
 
 		},
 
@@ -79,20 +99,13 @@ export default {
 	},
 
 	methods: {
-		async __fetchMenu () {
-			this.loading = true
-			try {
-				const { data } = await this.$axios.get('/groups')
-				this.groups = data
-			} catch (err) {
-				console.error(err)
-			}
-			this.loading = false
-		}
+		...mapActions('groups', [
+			'getGroups'
+		])
 	},
 
 	created () {
-		this.__fetchMenu()
+		this.getGroups()
 	}
 }
 </script>
