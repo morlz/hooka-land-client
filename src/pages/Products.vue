@@ -4,7 +4,8 @@
 			<product-item
 				:content="item"
 				:key="item.id"
-				v-for="item in items"
+				@delete="__delete(index)"
+				v-for="item, index in items"
 			/>
 		</div>
 
@@ -73,6 +74,10 @@ export default {
 				}
 			})
 
+		},
+
+		__delete (index) {
+			this.items.splice(index, 1)
 		}
 	},
 	created () {

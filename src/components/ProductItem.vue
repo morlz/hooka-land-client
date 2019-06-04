@@ -25,6 +25,15 @@
 				icon="shopping_cart"
 				label="Добавить в корзину"
 			/>
+
+			<q-btn
+				@click="__delete(content.id)"
+				color="negative"
+				flat
+				icon="delete"
+				label="Удалить товар"
+				v-if="logined"
+			/>
 		</q-card-actions>
 	</q-card>
 </template>
@@ -32,7 +41,7 @@
 
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations, mapState } from 'vuex'
 
 export default {
 	props: {
@@ -42,10 +51,25 @@ export default {
 		}
 	},
 
+	computed: {
+		...mapGetters('auth', [
+			'logined'
+		]),
+	},
+
 	methods: {
 		...mapActions('cart', [
 			'addItem'
-		])
+		]),
+		...mapActions('products', [
+			'deleteProduct'
+		]),
+		async __delete (id) {
+			const res = await this.deleteProduct(id)
+
+			if (res)
+				this.$emit('delete', id)
+		}
 	}
 }
 </script>
