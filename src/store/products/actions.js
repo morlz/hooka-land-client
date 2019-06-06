@@ -5,7 +5,7 @@ import { Notify } from 'quasar'
 export async function create ({ commit, dispatch }, form) {
 	const { data } = await this._vm.$axios.post('/products', {
 		...pick(form, ['name', 'description', 'img', 'unit', 'price']),
-		category_id: form.group.value
+		category_id: form.category.value
 	})
 
 	Notify.create({
