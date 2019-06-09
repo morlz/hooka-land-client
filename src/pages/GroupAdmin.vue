@@ -68,6 +68,40 @@
 				/>
 			</q-card-actions>
 		</q-card>
+
+		<q-card class="GroupAdmin__card">
+			<q-card-section>
+				<div class="text-h4">Создать категорию товаров</div>
+			</q-card-section>
+
+			<q-card-section
+				class="q-gutter-md"
+				style="max-width: 300px"
+			>
+				<q-select
+					:options="groupOptions"
+					label="Группа"
+					v-model="catForm.group"
+				/>
+
+				<q-input
+					filled
+					label="Название"
+					v-model="catForm.name"
+				/>
+			</q-card-section>
+
+			<q-separator/>
+
+			<q-card-actions>
+				<q-btn
+					@click="__createCategory(catForm)"
+					color="primary"
+					icon="check"
+					label="Добавить"
+				/>
+			</q-card-actions>
+		</q-card>
 	</q-page>
 </template>
 
@@ -100,10 +134,17 @@ export default {
 		return {
 			form: {
 				name: ''
+			},
+			catForm: {
+				name: '',
+				group: null
 			}
 		}
 	},
 	computed: {
+		...mapGetters('groups', [
+			'groupOptions',
+		]),
 		...mapState('groups', [
 			'groups'
 		]),
@@ -118,13 +159,28 @@ export default {
 		}),
 
 		...mapActions('categories', [
-
+			'createCategory',
+			'removeCategory',
 		]),
 
 		__remove (node) {
-			if (node.type == GR) {
-				this.removeGroup(node.id)
+			switch (node.type) {
+				case GR:
+					this.removeGroup(node.id)
+					break
+
+				case CAT:
+					this.removeCategory(node.id)
+					break
 			}
+
+		},
+
+		__createCategory (form) {
+			this.createCategory({
+				name: form.name,
+				group_id: form.group.value
+			})
 		}
 	}
 }

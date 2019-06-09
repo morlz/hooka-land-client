@@ -5,6 +5,7 @@ import cart from './cart'
 import auth from './auth'
 import groups from './groups'
 import products from './products'
+import categories from './categories'
 
 Vue.use(Vuex)
 
@@ -19,7 +20,8 @@ export default function (/* { ssrContext } */) {
 			cart,
 			auth,
 			groups,
-			products
+			products,
+			categories
 		},
 
 		// enable strict mode (adds overhead!)
