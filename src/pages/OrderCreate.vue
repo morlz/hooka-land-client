@@ -39,6 +39,7 @@
 			<q-card-actions>
 				<q-btn
 					:disabled="!cartItemsCount"
+					@click="__createOrder"
 					color="primary"
 					icon="check"
 					label="Оформить заказ"
@@ -84,8 +85,11 @@ export default {
 		})
 	},
 	methods: {
+		...mapActions('orders', [
+			'createOrder'
+		]),
 		__createOrder () {
-
+			this.createOrder(this.client)
 		}
 	},
 	created () {

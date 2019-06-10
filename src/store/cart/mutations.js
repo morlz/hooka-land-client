@@ -10,6 +10,11 @@ export function removeItem (state, item) {
 	LocalStorage.set('cart-items', state.items)
 }
 
+export function removeAll (state) {
+	state.items = []
+	LocalStorage.remove('cart-items')
+}
+
 export function cachedSet (state, payload) {
 	state.cached = {
 		...state.cached,
